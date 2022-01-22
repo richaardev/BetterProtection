@@ -45,7 +45,7 @@ object TerrainCommand : DSLCommandBase<BetterProtection> {
                             "§bSeus blocos: §a${user.blocks}",
                             "§bBlocos em uso: §a${user.blocks - user.remainingBlocks}",
                             "",
-                            "§bTerrenos ativo\ns: §a${userTerrains.size}"
+                            "§bTerrenos ativos: §a${userTerrains.size}"
                         )
                 }
 
