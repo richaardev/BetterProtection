@@ -1,19 +1,15 @@
 package me.richaardev.betterprotection.commands
 
-import com.google.gson.Gson
 import me.richaardev.betterprotection.BetterProtection
 import me.richaardev.betterprotection.dao.Claim
 import me.richaardev.betterprotection.managers.ClaimManager
 import me.richaardev.betterprotection.managers.UserManager
 import me.richaardev.betterprotection.tables.claim.Claims.owner
-import me.richaardev.helper.command.DSLCommandBase
-import me.richaardev.helper.extensions.asOffline
-import me.richaardev.helper.extensions.playSound
+import me.richaardev.helper.command.CommandArguments
+import me.richaardev.helper.command.CommandContext
+import me.richaardev.helper.command.HelperCommand
+import me.richaardev.helper.expansions.*
 import me.richaardev.helper.menu.createMenu
-import me.richaardev.helper.utils.ItemUtils.glow
-import me.richaardev.helper.utils.ItemUtils.lore
-import me.richaardev.helper.utils.ItemUtils.meta
-import me.richaardev.helper.utils.ItemUtils.rename
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -21,62 +17,58 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import org.jetbrains.exposed.sql.transactions.transaction
-import java.io.InputStream
-import java.net.URL
+
+class TerrainCommand : HelperCommand(listOf("terrain", "terreno", "claim")) {
+    override fun execute(context: CommandContext, args: CommandArguments) {
+        val player = context.requirePlayer()
+        val userTerrains = ClaimManager.getClaimsFrom(player.asOffline())
+        val user = UserManager.getUser(player.asOffline())
+        val claim = ClaimManager.getClaimAt(player.location)
 
 
-object TerrainCommand : DSLCommandBase<BetterProtection> {
-    override fun command(plugin: BetterProtection) = create(listOf("terrain", "terreno", "claim")) {
-        executes {
-            val userTerrains = ClaimManager.getClaimsFrom(player.asOffline())
-            val user = UserManager.getUser(player.asOffline())
-            val claim = ClaimManager.getClaimAt(player.location)
-
-
-            val menu = createMenu("Menu de terrenos", 3) {
-                slot(1, 5) {
-                    item = ItemStack(Material.PLAYER_HEAD)
-                        .meta<SkullMeta> {
-                            this.owner = player.name
-                        }
-                        .rename("§a§lSuas informações")
-                        .lore(
-                            "",
-                            "§bSeus blocos: §a${user.blocks}",
-                            "§bBlocos em uso: §a${user.blocks - user.remainingBlocks}",
-                            "",
-                            "§bTerrenos ativos: §a${userTerrains.size}"
-                        )
-                }
-
-                slot (2, 3) {
-                    item = ItemStack(Material.GRASS_BLOCK)
-                        .rename("§aAlterar as configurações")
-                        .lore(
-                            "",
-                            "§bAltere as configurações da sua claim atual",
-                            "§bdando trust e etc..."
-                        )
-                    if (claim != null && claim.canManage(player)) item = item.glow()
-                    onClick {
-                        if (claim == null) return@onClick player.sendMessage("§cVocê não está em nenhuma claim!")
-                        if (!claim.canManage(player)) return@onClick player.sendMessage("§cVocê não pode gerenciar essa claim!")
-
-                        terrainConfiguration(player, claim)
+        val menu = createMenu("Menu de terrenos", 3) {
+            slot(1, 5) {
+                item = ItemStack(Material.PLAYER_HEAD)
+                    .meta<SkullMeta> {
+                        this.owner = player.name
                     }
-                }
+                    .rename("§a§lSuas informações")
+                    .lore(
+                        "",
+                        "§bSeus blocos: §a${user.blocks}",
+                        "§bBlocos em uso: §a${user.blocks - user.remainingBlocks}",
+                        "",
+                        "§bTerrenos ativos: §a${userTerrains.size}"
+                    )
+            }
 
-                slot(3, 1) {
-                    item = ItemStack(Material.TOTEM_OF_UNDYING)
-                        .rename("§e§l${BetterProtection.INSTANCE.name} Plugin")
-                        .lore(
-                            "",
-                            "",
-                            "§6Created with §c❤ §6by §brichaardev"
-                        )
+            slot(2, 3) {
+                item = ItemStack(Material.GRASS_BLOCK)
+                    .rename("§aAlterar as configurações")
+                    .lore(
+                        "",
+                        "§bAltere as configurações da sua claim atual",
+                        "§bdando trust e etc..."
+                    )
+                if (claim != null && claim.canManage(player)) item = item.glow()
+                onClick {
+                    if (claim == null) return@onClick player.sendMessage("§cVocê não está em nenhuma claim!")
+                    if (!claim.canManage(player)) return@onClick player.sendMessage("§cVocê não pode gerenciar essa claim!")
+
+                    terrainConfiguration(player, claim)
                 }
-            }.sendTo(player)
-        }
+            }
+
+            slot(3, 1) {
+                item = ItemStack(Material.TOTEM_OF_UNDYING)
+                    .rename("§e§lBetterProtection Plugin")
+                    .lore(
+                        "",
+                        "",
+                        "§6Created with §c❤ §6by §brichaardev"
+                    )
+            }
+        }.sendTo(player)
     }
 
     fun defaultMenu(player: Player) {

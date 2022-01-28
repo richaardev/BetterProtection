@@ -24,6 +24,6 @@ class BetterProtectionConfiguration(plugin: JavaPlugin) : BukkitYamlConfiguratio
         " !! Caso altere isso os jogadores que já entraram não irão ter a quantidade de alterada !!"
     )
     var initialBlocks by int("config.initial-blocks", 300)
-    var protectionTool by material("config.protection-tool", Material.GOLDEN_SHOVEL)
+    var protectionTool = Material.GOLDEN_SHOVEL// by material("config.protection-tool", Material.GOLDEN_SHOVEL)
 
 }

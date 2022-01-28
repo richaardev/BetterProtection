@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "me.richaardev.betterprotection"
-version = "22.01-SNAPSHOT"
+version = "27.01-SNAPSHOT"
 
 bukkit {
     name = "BetterProtection"
@@ -27,7 +27,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
 
-    api("me.richaardev.helper:helper:1.0.2-SNAPSHOT") // from local repository
+    api("me.richaardev.helper:helper:1.0.3-SNAPSHOT") // from local repository
 
     api("com.zaxxer:HikariCP:5.0.0")
     api("org.xerial:sqlite-jdbc:3.30.1")
@@ -42,6 +42,8 @@ tasks {
         dependencies {
             include(dependency("me.richaardev.helper:.*:.*"))
         }
+
+        relocate("me.richaardev.helper", "me.richaardev.betterprotection.helper")
     }
 
     generateBukkitPluginDescription {

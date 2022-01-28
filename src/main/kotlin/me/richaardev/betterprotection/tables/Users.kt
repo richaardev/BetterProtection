@@ -12,7 +12,7 @@ object Users : IdTable<UUID>() {
         get() = uniqueId
 
     val uniqueId = uuid("id").entityId()
-    val blocks = integer("blocks").default(BetterProtection.conf.initialBlocks)
+    val blocks = integer("blocks").default(BetterProtection.conf.initialBlocks!!)
 
     override val primaryKey: PrimaryKey
         get() = PrimaryKey(uniqueId)

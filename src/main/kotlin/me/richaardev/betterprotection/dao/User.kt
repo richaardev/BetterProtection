@@ -11,7 +11,7 @@ import java.util.*
 class User(id: EntityID<UUID>) : UUIDEntity(id) {
     companion object : UUIDEntityClass<User>(Users)
 
-    val blocks by Users.blocks
+    var blocks by Users.blocks
 
     val remainingBlocks: Int
         get() {

@@ -1,10 +1,5 @@
 package me.richaardev.betterprotection.util
 
-
-import me.richaardev.betterprotection.BetterProtection
-import me.richaardev.helper.extensions.scheduler
-import me.richaardev.helper.utils.scheduler.schedule
-import org.bukkit.Color
 import org.bukkit.Location
 import org.bukkit.block.Block
 import org.bukkit.entity.Player

@@ -2,10 +2,9 @@ package me.richaardev.betterprotection.util
 
 import me.richaardev.betterprotection.BetterProtection
 import me.richaardev.betterprotection.dao.Claim
-import me.richaardev.betterprotection.managers.ClaimManager
 import me.richaardev.betterprotection.managers.VisualizationManager
-import me.richaardev.helper.utils.scheduler.CoroutineTask
-import me.richaardev.helper.utils.scheduler.schedule
+import me.richaardev.helper.scheduler.CoroutineTask
+import me.richaardev.helper.scheduler.schedule
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.BlockFace

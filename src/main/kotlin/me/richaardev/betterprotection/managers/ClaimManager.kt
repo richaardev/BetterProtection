@@ -6,8 +6,8 @@ import me.richaardev.betterprotection.dao.ClaimFlag
 import me.richaardev.betterprotection.dao.User
 import me.richaardev.betterprotection.tables.claim.Claims
 import me.richaardev.betterprotection.util.Border
-import me.richaardev.helper.extensions.asOffline
-import me.richaardev.helper.extensions.playSound
+import me.richaardev.helper.expansions.asOffline
+import me.richaardev.helper.expansions.playSound
 import org.bukkit.*
 import org.bukkit.entity.Player
 import org.jetbrains.exposed.sql.transactions.transaction

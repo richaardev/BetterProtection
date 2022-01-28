@@ -13,9 +13,4 @@ object ClaimsFlags : IntIdTable() {
     val allow_item_pickup = bool("allow_item_pickup").default(false)
     val allow_open_doors = bool("allow_open_doors").default(true)
 
-    /*
-     Mais TODO:
-        - Evitar canhoes de tnt
-        - Evitar agua e lava entrar dentro da claim
-     */
 }

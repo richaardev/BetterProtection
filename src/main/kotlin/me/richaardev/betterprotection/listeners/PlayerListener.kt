@@ -4,8 +4,8 @@ import me.richaardev.betterprotection.BetterProtection
 import me.richaardev.betterprotection.managers.ClaimManager
 import me.richaardev.betterprotection.managers.UserManager
 import me.richaardev.betterprotection.managers.VisualizationManager
-import me.richaardev.helper.extensions.asOffline
-import me.richaardev.helper.extensions.events.isMoved
+import me.richaardev.helper.expansions.asOffline
+import me.richaardev.helper.expansions.isMoved
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.NamespacedKey

@@ -25,11 +25,6 @@ class Claim(id: EntityID<Int>) : IntEntity(id) {
     var corner2 by Claims.corner2
     var originalFlags by ClaimFlag referencedOn Claims.flags
 
-    fun getFlags(): ClaimFlag {
-        return transaction(BetterProtection.db) {
-            return@transaction originalFlags
-        }
-    }
     val corners: List<Border>
         get() {
             val cn1 = ClaimManager.deserializeCorner(corner1)
@@ -97,6 +92,11 @@ class Claim(id: EntityID<Int>) : IntEntity(id) {
         return inClaim
     }
 
+    fun getFlags(): ClaimFlag {
+        return transaction(BetterProtection.db) {
+            return@transaction originalFlags
+        }
+    }
     fun getTrusts(): List<ClaimTrust> {
         return transaction(BetterProtection.db) {
             return@transaction ClaimTrust.find { ClaimsTrusts.claim eq this@Claim.id }.toList()

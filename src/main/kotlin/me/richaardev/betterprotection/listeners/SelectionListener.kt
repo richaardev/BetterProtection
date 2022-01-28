@@ -5,8 +5,8 @@ import me.richaardev.betterprotection.BetterProtection
 import me.richaardev.betterprotection.util.Border
 import me.richaardev.betterprotection.util.ClaimSelection
 import me.richaardev.betterprotection.managers.ClaimManager
-import me.richaardev.helper.extensions.scheduler
-import me.richaardev.helper.utils.scheduler.schedule
+import me.richaardev.helper.expansions.scheduler
+import me.richaardev.helper.scheduler.schedule
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
